@@ -15,6 +15,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Set input validator for miliseconds field
     ui->edToneTime->setValidator(new QIntValidator(1, 10000, this));
+
+    // Connect menu elements
+    connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(close()));
 }
 
 MainWindow::~MainWindow()
@@ -146,4 +149,19 @@ void MainWindow::on_rbToneSingle_clicked()
 {
     ui->edToneTime->setEnabled(true);
     connectKeyboardButtons(false);
+}
+
+void MainWindow::on_actionAbout_author_triggered()
+{
+    QString text = "DTMF Tool by Jan \"aso\" Szenborn, SP2ASO<br><br>"
+                   "<a href=\"https://github.com/aso824/DTMFtool\">DTMFtool github</a><br>"
+                   "<a href=\"http://aso.uh.net.pl\">Author homepage</a><br><br>"
+                   "This program is on GNU GPL license. Read LICENSE.txt for more.";
+    QMessageBox box(QMessageBox::Information, trUtf8("About author"), text, QMessageBox::Ok, this);
+    box.exec();
+}
+
+void MainWindow::on_actionAbout_Qt_triggered()
+{
+    QMessageBox::aboutQt(this, trUtf8("About Qt"));
 }

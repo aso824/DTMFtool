@@ -367,6 +367,8 @@
     <property name="title">
      <string>Program</string>
     </property>
+    <addaction name="actionAbout_author"/>
+    <addaction name="actionAbout_Qt"/>
     <addaction name="actionExit"/>
    </widget>
    <addaction name="menuProgram"/>
@@ -374,6 +376,16 @@
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionAbout_author">
+   <property name="text">
+    <string>About author</string>
+   </property>
+  </action>
+  <action name="actionAbout_Qt">
+   <property name="text">
+    <string>About Qt </string>
    </property>
   </action>
  </widget>

@@ -10,6 +10,7 @@
 #include <QPushButton>
 #include <QTimer>
 #include <QIntValidator>
+#include <QMessageBox>
 
 #include <map>
 
@@ -53,6 +54,8 @@ private slots:
 
     void on_rbToneContinuous_clicked();
     void on_rbToneSingle_clicked();
+    void on_actionAbout_author_triggered();
+    void on_actionAbout_Qt_triggered();
 };
 
 #endif // MAINWINDOW_H
