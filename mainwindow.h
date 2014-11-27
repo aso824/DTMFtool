@@ -6,6 +6,7 @@
 #include <QAudioDeviceInfo>
 #include <QAudioFormat>
 #include "generator.h"
+#include "freqs.h"
 
 namespace Ui {
 class MainWindow;

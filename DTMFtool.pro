@@ -17,7 +17,8 @@ SOURCES += main.cpp\
     generator.cpp
 
 HEADERS  += mainwindow.h \
-    generator.h
+    generator.h \
+    freqs.h
 
 FORMS    += mainwindow.ui
 
