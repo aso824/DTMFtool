@@ -54,7 +54,7 @@ class Generator : public QIODevice
     Q_OBJECT
 
 public:
-    Generator(const QAudioFormat &format, qint64 durationUs, int sampleRate, QObject *parent);
+    Generator(const QAudioFormat &format, qint64 durationUs, int sampleRate1, int sampleRate2, QObject *parent);
     ~Generator();
 
     void start();
@@ -65,7 +65,7 @@ public:
     qint64 bytesAvailable() const;
 
 private:
-    void generateData(const QAudioFormat &format, qint64 durationUs, int sampleRate);
+    void generateData(const QAudioFormat &format, qint64 durationUs, int sampleRate1, int sampleRate2);
 
 private:
     qint64 m_pos;

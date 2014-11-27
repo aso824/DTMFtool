@@ -2,6 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QAudioOutput>
+#include <QAudioDeviceInfo>
+#include <QAudioFormat>
+#include "generator.h"
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +21,14 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+    QAudioDeviceInfo device;
+    QAudioOutput *output;
+    QAudioFormat format;
+    Generator *generator;
+
+    void initAudio();
+
 };
 
 #endif // MAINWINDOW_H

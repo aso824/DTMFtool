@@ -42,12 +42,12 @@
 
 Generator::Generator(const QAudioFormat &format,
                      qint64 durationUs,
-                     int sampleRate,
+                     int sampleRate1, int sampleRate2,
                      QObject *parent)
     :   QIODevice(parent)
     ,   m_pos(0)
 {
-    generateData(format, durationUs, sampleRate);
+    generateData(format, durationUs, sampleRate1, sampleRate2);
 }
 
 Generator::~Generator()
@@ -66,7 +66,7 @@ void Generator::stop()
     close();
 }
 
-void Generator::generateData(const QAudioFormat &format, qint64 durationUs, int sampleRate)
+void Generator::generateData(const QAudioFormat &format, qint64 durationUs, int sampleRate1, int sampleRate2)
 {
     const int channelBytes = format.sampleSize() / 8;
     const int sampleBytes = format.channelCount() * channelBytes;
@@ -82,7 +82,8 @@ void Generator::generateData(const QAudioFormat &format, qint64 durationUs, int 
     int sampleIndex = 0;
 
     while (length) {
-        const qreal x = qSin(2 * M_PI * sampleRate * qreal(sampleIndex % format.sampleRate()) / format.sampleRate());
+        // Tone 1
+        qreal x = qSin(2 * M_PI * sampleRate1 * qreal(sampleIndex % format.sampleRate()) / format.sampleRate());
         for (int i=0; i<format.channelCount(); ++i) {
             if (format.sampleSize() == 8 && format.sampleType() == QAudioFormat::UnSignedInt) {
                 const quint8 value = static_cast<quint8>((1.0 + x) / 2 * 255);
@@ -106,6 +107,39 @@ void Generator::generateData(const QAudioFormat &format, qint64 durationUs, int 
 
             ptr += channelBytes;
             length -= channelBytes;
+
+
+        }
+
+        ++sampleIndex;
+
+        // Tone 2
+        x = qSin(2 * M_PI * sampleRate2 * qreal(sampleIndex % format.sampleRate()) / format.sampleRate());
+        for (int i=0; i<format.channelCount(); ++i) {
+            if (format.sampleSize() == 8 && format.sampleType() == QAudioFormat::UnSignedInt) {
+                const quint8 value = static_cast<quint8>((1.0 + x) / 2 * 255);
+                *reinterpret_cast<quint8*>(ptr) = value;
+            } else if (format.sampleSize() == 8 && format.sampleType() == QAudioFormat::SignedInt) {
+                const qint8 value = static_cast<qint8>(x * 127);
+                *reinterpret_cast<quint8*>(ptr) = value;
+            } else if (format.sampleSize() == 16 && format.sampleType() == QAudioFormat::UnSignedInt) {
+                quint16 value = static_cast<quint16>((1.0 + x) / 2 * 65535);
+                if (format.byteOrder() == QAudioFormat::LittleEndian)
+                    qToLittleEndian<quint16>(value, ptr);
+                else
+                    qToBigEndian<quint16>(value, ptr);
+            } else if (format.sampleSize() == 16 && format.sampleType() == QAudioFormat::SignedInt) {
+                qint16 value = static_cast<qint16>(x * 32767);
+                if (format.byteOrder() == QAudioFormat::LittleEndian)
+                    qToLittleEndian<qint16>(value, ptr);
+                else
+                    qToBigEndian<qint16>(value, ptr);
+            }
+
+            ptr += channelBytes;
+            length -= channelBytes;
+
+
         }
         ++sampleIndex;
     }
