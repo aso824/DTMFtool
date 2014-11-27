@@ -12,6 +12,9 @@ MainWindow::MainWindow(QWidget *parent) :
     createKeyLayoutMap();
     getKeyboardButtons();
     connectKeyboardButtons();
+
+    // Set input validator for miliseconds field
+    ui->edToneTime->setValidator(new QIntValidator(1, 10000, this));
 }
 
 MainWindow::~MainWindow()
@@ -88,6 +91,8 @@ void MainWindow::connectKeyboardButtons(bool continuous) {
         // Connect to correct slot
         if (continuous) {
             // Button will emit tone continuously when pressed
+            connect(wid, SIGNAL(pressed(QString)), this, SLOT(buttonPlayContinuousTone(QString)));
+            connect(wid, SIGNAL(released()), this, SLOT(stopTone()));
         } else {
             // Only one signal will be emitted when pressed
             connect(wid, SIGNAL(clicked(QString)), this, SLOT(buttonPlaySingleTone(QString)));
@@ -120,5 +125,25 @@ void MainWindow::buttonPlaySingleTone(QString btnName) {\
     playTone(key);
 
     // Create single-shot timer to stop playing tone (non-continuous mode)
-    QTimer::singleShot(250, this, SLOT(stopTone()));
+    QTimer::singleShot(ui->edToneTime->text().toInt(), this, SLOT(stopTone()));
+}
+
+void MainWindow::buttonPlayContinuousTone(QString btnName) {
+    // Get key code
+    char key = btnName.at(btnName.length() - 1).toLatin1();
+
+    // Start playing tone
+    playTone(key);
+}
+
+void MainWindow::on_rbToneContinuous_clicked()
+{
+    ui->edToneTime->setDisabled(true);
+    connectKeyboardButtons(true);
+}
+
+void MainWindow::on_rbToneSingle_clicked()
+{
+    ui->edToneTime->setEnabled(true);
+    connectKeyboardButtons(false);
 }

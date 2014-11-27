@@ -11,9 +11,11 @@ public:
 
 private slots:
     void triggered();
+    void press();
 
 signals:
     void clicked(QString);
+    void pressed(QString);
 };
 
 #endif // QBUTTONEXTENDED_H

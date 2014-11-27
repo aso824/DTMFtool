@@ -9,6 +9,7 @@
 #include <QDebug>
 #include <QPushButton>
 #include <QTimer>
+#include <QIntValidator>
 
 #include <map>
 
@@ -47,8 +48,11 @@ private:
 
 private slots:
     void buttonPlaySingleTone(QString btnName);
+    void buttonPlayContinuousTone(QString btnName);
     void stopTone();
 
+    void on_rbToneContinuous_clicked();
+    void on_rbToneSingle_clicked();
 };
 
 #endif // MAINWINDOW_H
