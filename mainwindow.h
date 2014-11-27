@@ -8,6 +8,7 @@
 #include <QList>
 #include <QDebug>
 #include <QPushButton>
+#include <QTimer>
 
 #include <map>
 
@@ -39,12 +40,14 @@ private:
 
     void createKeyLayoutMap();
     void initAudio();
+    void playTone(char key);
+
     void getKeyboardButtons();
     void connectKeyboardButtons(bool continuous = false);
-    void buttonSingleTone(char key);
 
 private slots:
-    void buttonPlayTone(QString btnName);
+    void buttonPlaySingleTone(QString btnName);
+    void stopTone();
 
 };
 

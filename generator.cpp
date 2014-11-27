@@ -63,6 +63,7 @@ void Generator::start()
 void Generator::stop()
 {
     m_pos = 0;
+
     close();
 }
 

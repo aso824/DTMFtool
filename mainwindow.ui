@@ -23,6 +23,9 @@
       <height>23</height>
      </rect>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
     <property name="readOnly">
      <bool>true</bool>
     </property>
@@ -35,6 +38,9 @@
       <width>101</width>
       <height>23</height>
      </rect>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
     <property name="readOnly">
      <bool>true</bool>
@@ -247,7 +253,7 @@
       </widget>
      </item>
      <item row="3" column="2">
-      <widget class="QButtonExtended" name="btnKeyToneHash">
+      <widget class="QButtonExtended" name="btnKeyToneH">
        <property name="font">
         <font>
          <pointsize>18</pointsize>

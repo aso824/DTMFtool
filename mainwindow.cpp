@@ -59,6 +59,16 @@ void MainWindow::initAudio() {
     output = new QAudioOutput(device, format, this);
 }
 
+void MainWindow::stopTone() {
+    // Stop generator and audio
+    output->stop();
+    generator->stop();
+
+    // Clear UI fields
+    ui->edTone1->clear();
+    ui->edTone2->clear();
+}
+
 void MainWindow::getKeyboardButtons() {
     // Iterate over all buttons in grid layout (keyboard)
     for (int i = 0; i < ui->gridKeyboard->count(); i++) {
@@ -80,26 +90,35 @@ void MainWindow::connectKeyboardButtons(bool continuous) {
             // Button will emit tone continuously when pressed
         } else {
             // Only one signal will be emitted when pressed
-            connect(wid, SIGNAL(clicked(QString)), this, SLOT(buttonPlayTone(QString)));
+            connect(wid, SIGNAL(clicked(QString)), this, SLOT(buttonPlaySingleTone(QString)));
         }
     }
 }
 
-void MainWindow::buttonPlayTone(QString btnName) {
-    // Get key code
-    char keyCode = btnName.at(btnName.length() - 1).toLatin1();
-
-    // Call function
-    buttonSingleTone(keyCode);
-}
-
-void MainWindow::buttonSingleTone(char key) {
-    qDebug() << "Playing tone" << key;
-
+void MainWindow::playTone(char key) {
+    // Get tones
     unsigned short tone1 = DTMFfreq[0][keyLayoutMap[key].first],
                    tone2 = DTMFfreq[1][keyLayoutMap[key].second];
 
+    // Fill UI fields
+    QString t1 = QString::number(tone1) + QString(" Hz");
+    QString t2 = QString::number(tone2) + QString(" Hz");
+    ui->edTone1->setText(t1);
+    ui->edTone2->setText(t2);
+
+    // Start generator and audio output
     generator = new Generator(format, 100000, tone1, tone2, this);
     generator->start();
     output->start(generator);
+}
+
+void MainWindow::buttonPlaySingleTone(QString btnName) {\
+    // Get key code
+    char key = btnName.at(btnName.length() - 1).toLatin1();
+
+    // Start playing tone
+    playTone(key);
+
+    // Create single-shot timer to stop playing tone (non-continuous mode)
+    QTimer::singleShot(250, this, SLOT(stopTone()));
 }
