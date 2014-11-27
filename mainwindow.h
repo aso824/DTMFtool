@@ -5,6 +5,12 @@
 #include <QAudioOutput>
 #include <QAudioDeviceInfo>
 #include <QAudioFormat>
+#include <QList>
+#include <QDebug>
+#include <QPushButton>
+
+#include <map>
+
 #include "generator.h"
 #include "freqs.h"
 
@@ -28,7 +34,17 @@ private:
     QAudioFormat format;
     Generator *generator;
 
+    QList<QWidget*> keyboardButtonsList;
+    std::map<char, std::pair<unsigned short, unsigned short>> keyLayoutMap;
+
+    void createKeyLayoutMap();
     void initAudio();
+    void getKeyboardButtons();
+    void connectKeyboardButtons(bool continuous = false);
+    void buttonSingleTone(char key);
+
+private slots:
+    void buttonPlayTone(QString btnName);
 
 };
 

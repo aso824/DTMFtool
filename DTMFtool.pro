@@ -14,11 +14,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    generator.cpp
+    generator.cpp \
+    qbuttonextended.cpp
 
 HEADERS  += mainwindow.h \
     generator.h \
-    freqs.h
+    freqs.h \
+    qbuttonextended.h
 
 FORMS    += mainwindow.ui
 

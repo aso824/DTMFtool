@@ -49,9 +49,9 @@
       <height>191</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout">
+    <layout class="QGridLayout" name="gridKeyboard">
      <item row="0" column="2">
-      <widget class="QPushButton" name="btnKeyTone3">
+      <widget class="QButtonExtended" name="btnKeyTone3">
        <property name="font">
         <font>
          <pointsize>18</pointsize>
@@ -65,7 +65,7 @@
       </widget>
      </item>
      <item row="1" column="2">
-      <widget class="QPushButton" name="btnKeyTone6">
+      <widget class="QButtonExtended" name="btnKeyTone6">
        <property name="font">
         <font>
          <pointsize>18</pointsize>
@@ -79,7 +79,7 @@
       </widget>
      </item>
      <item row="0" column="3">
-      <widget class="QPushButton" name="btnKeyToneA">
+      <widget class="QButtonExtended" name="btnKeyToneA">
        <property name="font">
         <font>
          <pointsize>18</pointsize>
@@ -93,7 +93,7 @@
       </widget>
      </item>
      <item row="1" column="3">
-      <widget class="QPushButton" name="btnKeyToneB">
+      <widget class="QButtonExtended" name="btnKeyToneB">
        <property name="font">
         <font>
          <pointsize>18</pointsize>
@@ -107,7 +107,7 @@
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QPushButton" name="btnKeyTone4">
+      <widget class="QButtonExtended" name="btnKeyTone4">
        <property name="font">
         <font>
          <pointsize>18</pointsize>
@@ -121,7 +121,7 @@
       </widget>
      </item>
      <item row="2" column="0">
-      <widget class="QPushButton" name="btnKeyTone7">
+      <widget class="QButtonExtended" name="btnKeyTone7">
        <property name="font">
         <font>
          <pointsize>18</pointsize>
@@ -135,7 +135,7 @@
       </widget>
      </item>
      <item row="2" column="2">
-      <widget class="QPushButton" name="btnKeyTone9">
+      <widget class="QButtonExtended" name="btnKeyTone9">
        <property name="font">
         <font>
          <pointsize>18</pointsize>
@@ -149,7 +149,7 @@
       </widget>
      </item>
      <item row="0" column="0">
-      <widget class="QPushButton" name="btnKeyTone1">
+      <widget class="QButtonExtended" name="btnKeyTone1">
        <property name="font">
         <font>
          <pointsize>18</pointsize>
@@ -163,7 +163,7 @@
       </widget>
      </item>
      <item row="2" column="3">
-      <widget class="QPushButton" name="btnKeyToneC">
+      <widget class="QButtonExtended" name="btnKeyToneC">
        <property name="font">
         <font>
          <pointsize>18</pointsize>
@@ -177,7 +177,7 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QPushButton" name="btnKeyTone2">
+      <widget class="QButtonExtended" name="btnKeyTone2">
        <property name="font">
         <font>
          <pointsize>18</pointsize>
@@ -191,7 +191,7 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QPushButton" name="btnKeyTone5">
+      <widget class="QButtonExtended" name="btnKeyTone5">
        <property name="font">
         <font>
          <pointsize>18</pointsize>
@@ -205,7 +205,7 @@
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QPushButton" name="btnKeyTone8">
+      <widget class="QButtonExtended" name="btnKeyTone8">
        <property name="font">
         <font>
          <pointsize>18</pointsize>
@@ -219,7 +219,7 @@
       </widget>
      </item>
      <item row="3" column="0">
-      <widget class="QPushButton" name="btnKeyToneStar">
+      <widget class="QButtonExtended" name="btnKeyToneS">
        <property name="font">
         <font>
          <pointsize>18</pointsize>
@@ -233,7 +233,7 @@
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QPushButton" name="btnKeyTone0">
+      <widget class="QButtonExtended" name="btnKeyTone0">
        <property name="font">
         <font>
          <pointsize>18</pointsize>
@@ -247,7 +247,7 @@
       </widget>
      </item>
      <item row="3" column="2">
-      <widget class="QPushButton" name="btnKeyToneHash">
+      <widget class="QButtonExtended" name="btnKeyToneHash">
        <property name="font">
         <font>
          <pointsize>18</pointsize>
@@ -261,7 +261,7 @@
       </widget>
      </item>
      <item row="3" column="3">
-      <widget class="QPushButton" name="btnKeyToneD">
+      <widget class="QButtonExtended" name="btnKeyToneD">
        <property name="font">
         <font>
          <pointsize>18</pointsize>
@@ -301,6 +301,13 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QButtonExtended</class>
+   <extends>QPushButton</extends>
+   <header location="global">qbuttonextended.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
