@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>306</width>
+    <width>305</width>
     <height>413</height>
    </rect>
   </property>
@@ -159,11 +159,6 @@
         <string>Continuous</string>
        </property>
       </widget>
-      <zorder>rbToneSingle</zorder>
-      <zorder>edToneTime</zorder>
-      <zorder>lbMilisecondsTime</zorder>
-      <zorder>rbToneContinuous</zorder>
-      <zorder>gridLayoutWidget</zorder>
      </widget>
      <widget class="QWidget" name="gridLayoutWidget">
       <property name="geometry">
@@ -547,7 +542,7 @@
         <string>40</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="edGenToneLength_2">
+      <widget class="QLineEdit" name="edGenToneInterval">
        <property name="geometry">
         <rect>
          <x>162</x>
@@ -645,7 +640,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>306</width>
+     <width>305</width>
      <height>20</height>
     </rect>
    </property>

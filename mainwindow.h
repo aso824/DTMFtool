@@ -11,6 +11,7 @@
 #include <QTimer>
 #include <QIntValidator>
 #include <QMessageBox>
+#include <QThread>
 
 #include <map>
 
@@ -42,7 +43,7 @@ private:
 
     void createKeyLayoutMap();
     void initAudio();
-    void playTone(char key);
+    void playTone(char key, bool fillUI = true);
 
     void getKeyboardButtons();
     void connectKeyboardButtons(bool continuous = false);
@@ -56,6 +57,7 @@ private slots:
     void on_rbToneSingle_clicked();
     void on_actionAbout_author_triggered();
     void on_actionAbout_Qt_triggered();
+    void on_btnGenStart_clicked();
 };
 
 #endif // MAINWINDOW_H

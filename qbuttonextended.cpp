@@ -3,7 +3,7 @@
 QButtonExtended::QButtonExtended(QWidget *parent) :
     QPushButton(parent)
 {
-    connect(this, SIGNAL(clicked()), this, SLOT(triggered()));
+    connect(this, SIGNAL(pressed()), this, SLOT(triggered()));
     connect(this, SIGNAL(pressed()), this, SLOT(press()));
 }
 

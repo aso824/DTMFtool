@@ -13,8 +13,10 @@ MainWindow::MainWindow(QWidget *parent) :
     getKeyboardButtons();
     connectKeyboardButtons();
 
-    // Set input validator for miliseconds field
+    // Set input validator for miliseconds fields
     ui->edToneTime->setValidator(new QIntValidator(1, 10000, this));
+    ui->edGenToneLength->setValidator(new QIntValidator(1, 10000, this));
+    ui->edGenToneInterval->setValidator(new QIntValidator(1, 10000, this));
 
     // Connect menu elements
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(close()));
@@ -103,16 +105,19 @@ void MainWindow::connectKeyboardButtons(bool continuous) {
     }
 }
 
-void MainWindow::playTone(char key) {
+void MainWindow::playTone(char key, bool fillUI) {
     // Get tones
     unsigned short tone1 = DTMFfreq[0][keyLayoutMap[key].first],
                    tone2 = DTMFfreq[1][keyLayoutMap[key].second];
 
     // Fill UI fields
-    QString t1 = QString::number(tone1) + QString(" Hz");
-    QString t2 = QString::number(tone2) + QString(" Hz");
-    ui->edTone1->setText(t1);
-    ui->edTone2->setText(t2);
+
+    if (fillUI) {
+        QString t1 = QString::number(tone1) + QString(" Hz");
+        QString t2 = QString::number(tone2) + QString(" Hz");
+        ui->edTone1->setText(t1);
+        ui->edTone2->setText(t2);
+    }
 
     // Start generator and audio output
     generator = new Generator(format, 100000, tone1, tone2, this);
@@ -164,4 +169,30 @@ void MainWindow::on_actionAbout_author_triggered()
 void MainWindow::on_actionAbout_Qt_triggered()
 {
     QMessageBox::aboutQt(this, trUtf8("About Qt"));
+}
+
+void MainWindow::on_btnGenStart_clicked()
+{
+    // Block UI elements
+    ui->edGeneratorInput->setReadOnly(true);
+    ui->grGeneratorParameters->setDisabled(true);
+
+    // Copy and prepare values from UI
+    QString input = ui->edGeneratorInput->text().toUpper();
+    unsigned short toneTime = ui->edGenToneLength->text().toInt(),
+                   toneInterval = ui->edGenToneInterval->text().toInt();
+
+    // Play loop
+    foreach (QChar ch, input) {
+        // Play tone x miliseconds
+        playTone(ch.toLatin1(), false);
+        QThread::currentThread()->msleep(toneTime);
+        stopTone();
+
+        // Wait x miliseconds (interval between tones)
+        QThread::currentThread()->msleep(toneInterval);
+    }
+
+    ui->edGeneratorInput->setReadOnly(false);
+    ui->grGeneratorParameters->setEnabled(true);
 }
