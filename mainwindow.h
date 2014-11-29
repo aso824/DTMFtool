@@ -13,10 +13,7 @@
 #include <QMessageBox>
 #include <QThread>
 
-#include <map>
-
-#include "generator.h"
-#include "freqs.h"
+#include "toneplayer.h"
 
 namespace Ui {
 class MainWindow;
@@ -32,35 +29,29 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    TonePlayer *output;
 
-    QAudioDeviceInfo device;
-    QAudioOutput *output;
-    QAudioFormat format;
-    Generator *generator;
-
+    bool continuous = false;
     QList<QWidget*> keyboardButtonsList;
-    std::map<char, std::pair<unsigned short, unsigned short>> keyLayoutMap;
-
-    void createKeyLayoutMap();
-    void initAudio();
 
     void getKeyboardButtons();
-    void connectKeyboardButtons(bool continuous = false);
+    void connectKeyboardButtons();
 
 private slots:
-    void buttonPlaySingleTone(QString btnName);
-    void buttonPlayContinuousTone(QString btnName);
-
-    void playTone(char key);
     void stopTone();
 
-    void on_rbToneContinuous_clicked();
-    void on_rbToneSingle_clicked();
+    void buttonPlayToneAction(QString btnName);
+    void radioToneSingle();
+    void radioToneContinuous();
+    void setFreqsFields(int f1, int f2);
+    void clearFreqsFields();
+
+    void dialerStart();
+    void dialerStopped();
+
     void on_actionAbout_author_triggered();
     void on_actionAbout_Qt_triggered();
-    void on_btnGenStart_clicked();
 
-    void dialerStopped();
 };
 
 #endif // MAINWINDOW_H

@@ -27,7 +27,7 @@
      <locale language="English" country="UnitedStates"/>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tabKeyboard">
      <property name="locale">
@@ -163,9 +163,9 @@
      <widget class="QWidget" name="gridLayoutWidget">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>20</x>
         <y>50</y>
-        <width>261</width>
+        <width>241</width>
         <height>191</height>
        </rect>
       </property>

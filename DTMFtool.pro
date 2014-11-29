@@ -16,13 +16,15 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     generator.cpp \
     qbuttonextended.cpp \
-    dialer.cpp
+    dialer.cpp \
+    toneplayer.cpp
 
 HEADERS  += mainwindow.h \
     generator.h \
     freqs.h \
     qbuttonextended.h \
-    dialer.h
+    dialer.h \
+    toneplayer.h
 
 FORMS    += mainwindow.ui
 
