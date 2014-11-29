@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -105,14 +105,17 @@ void MainWindow::connectKeyboardButtons(bool continuous) {
     }
 }
 
-void MainWindow::playTone(char key, bool fillUI) {
+void MainWindow::playTone(char key) {
     // Get tones
     unsigned short tone1 = DTMFfreq[0][keyLayoutMap[key].first],
                    tone2 = DTMFfreq[1][keyLayoutMap[key].second];
 
-    // Fill UI fields
+    qDebug() << "Playing tone" << tone1 << "Hz /" << tone2 << "Hz";
 
-    if (fillUI) {
+    // Fill UI fields
+    QButtonExtended *btn = qobject_cast<QButtonExtended*>(QObject::sender());
+    if (btn != nullptr) {
+        qDebug() << "Filling UI fields";
         QString t1 = QString::number(tone1) + QString(" Hz");
         QString t2 = QString::number(tone2) + QString(" Hz");
         ui->edTone1->setText(t1);
@@ -182,16 +185,15 @@ void MainWindow::on_btnGenStart_clicked()
     unsigned short toneTime = ui->edGenToneLength->text().toInt(),
                    toneInterval = ui->edGenToneInterval->text().toInt();
 
-    // Play loop
-    foreach (QChar ch, input) {
-        // Play tone x miliseconds
-        playTone(ch.toLatin1(), false);
-        QThread::currentThread()->msleep(toneTime);
-        stopTone();
+    qDebug() << "Dialer start";
 
-        // Wait x miliseconds (interval between tones)
-        QThread::currentThread()->msleep(toneInterval);
-    }
+    // Spawn thread
+
+
+}
+
+void MainWindow::dialerStopped() {
+    qDebug() << "Dialer stop";
 
     ui->edGeneratorInput->setReadOnly(false);
     ui->grGeneratorParameters->setEnabled(true);

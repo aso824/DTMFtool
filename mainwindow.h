@@ -43,7 +43,6 @@ private:
 
     void createKeyLayoutMap();
     void initAudio();
-    void playTone(char key, bool fillUI = true);
 
     void getKeyboardButtons();
     void connectKeyboardButtons(bool continuous = false);
@@ -51,6 +50,8 @@ private:
 private slots:
     void buttonPlaySingleTone(QString btnName);
     void buttonPlayContinuousTone(QString btnName);
+
+    void playTone(char key);
     void stopTone();
 
     void on_rbToneContinuous_clicked();
@@ -58,6 +59,8 @@ private slots:
     void on_actionAbout_author_triggered();
     void on_actionAbout_Qt_triggered();
     void on_btnGenStart_clicked();
+
+    void dialerStopped();
 };
 
 #endif // MAINWINDOW_H
