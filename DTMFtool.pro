@@ -15,12 +15,14 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     generator.cpp \
-    qbuttonextended.cpp
+    qbuttonextended.cpp \
+    dialer.cpp
 
 HEADERS  += mainwindow.h \
     generator.h \
     freqs.h \
-    qbuttonextended.h
+    qbuttonextended.h \
+    dialer.h
 
 FORMS    += mainwindow.ui
 
