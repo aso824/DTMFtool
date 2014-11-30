@@ -36,6 +36,9 @@ void Dialer::run() {
 
 void Dialer::play() {
     foreach(QChar ch, data) {
+        while (paused)
+            msleep(100);
+
         currentPos++;
         sendProgress();
 

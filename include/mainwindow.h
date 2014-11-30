@@ -50,6 +50,7 @@ private slots:
     void clearFreqsFields();
 
     void dialerStart();
+    void dialerPause();
     void dialerStopped();
     void updateDialerProgress(int val);
 

@@ -18,6 +18,7 @@ public:
     void setData(QString dialerData);
     void setTonePlayer(TonePlayer *tonePlayer);
 
+    bool inline isPaused() { return paused; }
 
 signals:
     void end();

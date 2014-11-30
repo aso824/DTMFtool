@@ -448,14 +448,14 @@
       </layout>
      </widget>
     </widget>
-    <widget class="QWidget" name="tabGenerator">
+    <widget class="QWidget" name="tabDialer">
      <property name="locale">
       <locale language="English" country="UnitedStates"/>
      </property>
      <attribute name="title">
-      <string>Generator</string>
+      <string>Dialer</string>
      </attribute>
-     <widget class="QGroupBox" name="grGeneratorInput">
+     <widget class="QGroupBox" name="grDialInput">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -467,7 +467,7 @@
       <property name="title">
        <string>Input</string>
       </property>
-      <widget class="QLineEdit" name="edGeneratorInput">
+      <widget class="QLineEdit" name="edDialInput">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -477,7 +477,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QProgressBar" name="genProgress">
+      <widget class="QProgressBar" name="dialProgress">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -491,7 +491,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="QGroupBox" name="grGeneratorParameters">
+     <widget class="QGroupBox" name="grDialParameters">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -529,7 +529,7 @@
         <string>Interval:</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="edGenToneLength">
+      <widget class="QLineEdit" name="edDialToneLength">
        <property name="geometry">
         <rect>
          <x>162</x>
@@ -539,10 +539,10 @@
         </rect>
        </property>
        <property name="text">
-        <string>40</string>
+        <string>80</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="edGenToneInterval">
+      <widget class="QLineEdit" name="edDialToneInterval">
        <property name="geometry">
         <rect>
          <x>162</x>
@@ -552,10 +552,10 @@
         </rect>
        </property>
        <property name="text">
-        <string>40</string>
+        <string>80</string>
        </property>
       </widget>
-      <widget class="QLabel" name="lbGenMs1">
+      <widget class="QLabel" name="lbDialMs1">
        <property name="geometry">
         <rect>
          <x>220</x>
@@ -568,7 +568,7 @@
         <string>ms</string>
        </property>
       </widget>
-      <widget class="QLabel" name="lbGenMs2">
+      <widget class="QLabel" name="lbDialMs2">
        <property name="geometry">
         <rect>
          <x>220</x>
@@ -582,7 +582,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="QPushButton" name="btnGenStart">
+     <widget class="QPushButton" name="btnDialStart">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -595,7 +595,7 @@
        <string>Start</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="btnGenPause">
+     <widget class="QPushButton" name="btnDialPause">
       <property name="enabled">
        <bool>false</bool>
       </property>
@@ -611,7 +611,7 @@
        <string>Pause</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="btnGenStop">
+     <widget class="QPushButton" name="btnDialStop">
       <property name="enabled">
        <bool>false</bool>
       </property>

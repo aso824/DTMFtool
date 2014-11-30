@@ -12,8 +12,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Set input validator for miliseconds fields
     ui->edToneTime->setValidator(new QIntValidator(1, 10000, this));
-    ui->edGenToneLength->setValidator(new QIntValidator(1, 10000, this));
-    ui->edGenToneInterval->setValidator(new QIntValidator(1, 10000, this));
+    ui->edDialToneLength->setValidator(new QIntValidator(1, 10000, this));
+    ui->edDialToneInterval->setValidator(new QIntValidator(1, 10000, this));
 
     /* Connect UI elements */
 
@@ -29,8 +29,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(output, SIGNAL(playingTone(int,int)), this, SLOT(setFreqsFields(int,int)));
     connect(output, SIGNAL(stopped()), this, SLOT(clearFreqsFields()));
 
-    // Buttons for generator
-    connect(ui->btnGenStart, SIGNAL(clicked()), this, SLOT(dialerStart()));
+    // Buttons for dialer
+    connect(ui->btnDialStart, SIGNAL(clicked()), this, SLOT(dialerStart()));
 
     // Menu elements
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(close()));
@@ -129,13 +129,16 @@ void MainWindow::on_actionAbout_Qt_triggered()
 
 void MainWindow::dialerStart() {
     // Block UI elements
-    ui->edGeneratorInput->setReadOnly(true);
-    ui->grGeneratorParameters->setDisabled(true);
+    ui->edDialInput->setReadOnly(true);
+    ui->grDialParameters->setDisabled(true);
+    ui->btnDialStart->setDisabled(true);
+    ui->btnDialStop->setEnabled(true);
+    ui->btnDialPause->setEnabled(true);
 
     // Copy and prepare values from UI
-    QString input = ui->edGeneratorInput->text().toUpper();
-    unsigned short toneTime = ui->edGenToneLength->text().toInt(),
-                   toneInterval = ui->edGenToneInterval->text().toInt();
+    QString input = ui->edDialInput->text().toUpper();
+    unsigned short toneTime = ui->edDialToneLength->text().toInt(),
+                   toneInterval = ui->edDialToneInterval->text().toInt();
 
     // Prepare thread
     dialer = new Dialer(this);
@@ -145,8 +148,8 @@ void MainWindow::dialerStart() {
 
     // Connect dialer to slots
     connect(dialer, SIGNAL(end()), this, SLOT(dialerStopped()));
-    connect(dialer, SIGNAL(updateProgress(int)), ui->genProgress, SLOT(setValue(int)));
-    connect(ui->genProgress, SIGNAL(valueChanged(int)), this, SLOT(updateDialerProgress(int)));
+    connect(dialer, SIGNAL(updateProgress(int)), ui->dialProgress, SLOT(setValue(int)));
+    connect(dialer, SIGNAL(updateProgress(int)), this, SLOT(updateDialerProgress(int)));
 
     // Run
     qDebug() << "Dialer started";
@@ -154,15 +157,31 @@ void MainWindow::dialerStart() {
 
 }
 
+void MainWindow::dialerPause() {
+    if (dialer->isPaused()) {
+        ui->btnDialPause->setDisabled(true);
+        dialer->resume();
+    } else {
+        ui->btnDialPause->setEnabled(true);
+        dialer->pause();
+    }
+
+    ui->btnDialPause->update();
+    qApp->processEvents();
+}
+
 void MainWindow::dialerStopped() {
     qDebug() << "Dialer stopped";
 
-    ui->edGeneratorInput->setReadOnly(false);
-    ui->grGeneratorParameters->setEnabled(true);
+    ui->edDialInput->setReadOnly(false);
+    ui->grDialParameters->setEnabled(true);
+    ui->btnDialStop->setDisabled(true);
+    ui->btnDialStart->setEnabled(true);
+    ui->btnDialPause->setDisabled(true);
 }
 
 void MainWindow::updateDialerProgress(int val) {
-    ui->genProgress->setValue(val);
-    ui->genProgress->update();
+    ui->dialProgress->setValue(val);
+    ui->dialProgress->update();
     qApp->processEvents();
 }
