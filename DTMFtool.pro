@@ -12,19 +12,19 @@ TARGET = DTMFtool
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        mainwindow.cpp \
-    generator.cpp \
-    qbuttonextended.cpp \
-    dialer.cpp \
-    toneplayer.cpp
+SOURCES += src/main.cpp\
+        src/mainwindow.cpp \
+		src/generator.cpp \
+		src/qbuttonextended.cpp \
+		src/dialer.cpp \
+		src/toneplayer.cpp
 
-HEADERS  += mainwindow.h \
-    generator.h \
-    freqs.h \
-    qbuttonextended.h \
-    dialer.h \
-    toneplayer.h
+HEADERS  += include/mainwindow.h \
+		include/generator.h \
+		include/freqs.h \
+                qbuttonextended.h \
+		include/dialer.h \
+		include/toneplayer.h
 
 FORMS    += mainwindow.ui
 

@@ -38,7 +38,7 @@
 **
 ****************************************************************************/
 
-#include "generator.h"
+#include "include/generator.h"
 
 Generator::Generator(const QAudioFormat &format,
                      qint64 durationUs,

@@ -1,4 +1,4 @@
-#include "toneplayer.h"
+#include "include/toneplayer.h"
 
 TonePlayer::TonePlayer(QObject *parent) :
     QObject(parent)

@@ -1,4 +1,4 @@
-#include "dialer.h"
+#include "include/dialer.h"
 
 Dialer::Dialer(QObject *parent) :
     QThread(parent)
