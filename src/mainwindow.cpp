@@ -137,7 +137,21 @@ void MainWindow::dialerStart() {
     unsigned short toneTime = ui->edGenToneLength->text().toInt(),
                    toneInterval = ui->edGenToneInterval->text().toInt();
 
+    // Prepare thread
+    dialer = new Dialer(this);
+    dialer->setParameters(toneTime, toneInterval);
+    dialer->setData(input);
+    dialer->setTonePlayer(output);
+
+    // Connect dialer to slots
+    connect(dialer, SIGNAL(end()), this, SLOT(dialerStopped()));
+    connect(dialer, SIGNAL(updateProgress(int)), ui->genProgress, SLOT(setValue(int)));
+    connect(ui->genProgress, SIGNAL(valueChanged(int)), this, SLOT(updateDialerProgress(int)));
+
+    // Run
     qDebug() << "Dialer started";
+    dialer->start();
+
 }
 
 void MainWindow::dialerStopped() {
@@ -145,4 +159,10 @@ void MainWindow::dialerStopped() {
 
     ui->edGeneratorInput->setReadOnly(false);
     ui->grGeneratorParameters->setEnabled(true);
+}
+
+void MainWindow::updateDialerProgress(int val) {
+    ui->genProgress->setValue(val);
+    ui->genProgress->update();
+    qApp->processEvents();
 }

@@ -5,6 +5,10 @@ Dialer::Dialer(QObject *parent) :
 {
 }
 
+Dialer::~Dialer() {
+    emit end();
+}
+
 void Dialer::setParameters(unsigned short digitTime, unsigned short digitInterval) {
     time = digitTime;
     interval = digitInterval;
@@ -18,29 +22,26 @@ void Dialer::setData(QString dialerData) {
         if (( (ch >= '0') && (ch <= '9')) || ( (ch >= 'A') && (ch <= 'D')))
             data += ch;
     }
+
+    dataLen = data.length();
 }
 
+ void Dialer::setTonePlayer(TonePlayer *tonePlayer) {
+     output = tonePlayer;
+ }
+
 void Dialer::run() {
-    // Parameters for progress bar
-    unsigned short len = data.length();
+    play();
+}
 
-    // Main thread loop
-    for (unsigned short i = 0; i < len; i++) {
-        // Wait if paused
-        while (paused) {
-            msleep(10);
-        }
+void Dialer::play() {
+    foreach(QChar ch, data) {
+        currentPos++;
+        sendProgress();
 
-        // Emit data for progress bar
-        int progress = (i / len) * 100;
-        emit updateProgress(progress);
-
-        // Make sound
-        emit playTone(data[i].toLatin1());
+        output->playTone(ch.toLatin1());
         msleep(time);
-        emit stopTone();
-
-        // Wait time between digits
+        output->stopTone();
         msleep(interval);
     }
 
@@ -53,4 +54,9 @@ void Dialer::pause() {
 
 void Dialer::resume() {
     paused = false;
+}
+
+void Dialer::sendProgress() {
+    int progress = (currentPos / dataLen) * 100;
+    emit updateProgress(progress);
 }

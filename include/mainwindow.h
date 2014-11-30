@@ -14,6 +14,7 @@
 #include <QThread>
 
 #include "toneplayer.h"
+#include "dialer.h"
 
 namespace Ui {
 class MainWindow;
@@ -30,6 +31,8 @@ public:
 private:
     Ui::MainWindow *ui;
     TonePlayer *output;
+    QThread *outputThread;
+    Dialer *dialer;
 
     bool continuous = false;
     QList<QWidget*> keyboardButtonsList;
@@ -48,6 +51,7 @@ private slots:
 
     void dialerStart();
     void dialerStopped();
+    void updateDialerProgress(int val);
 
     void on_actionAbout_author_triggered();
     void on_actionAbout_Qt_triggered();
