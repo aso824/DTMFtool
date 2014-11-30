@@ -10,15 +10,15 @@ Features
 * Generator - enter number (very handy for *Echolink*), set parameters - tone length and interval between tones - and click play. 
 * Decoder - select audio input and see tones. Also you have spectrum monitor hidden in menu.
 * UI styling - you can use light or dark colors.
+* Multilanguage - primary language is english, secondary is polish. Help project and add your language!
 
 **Note**: some features may not be accessible due to still development stage. Final, stable version (*v1.0*) will have all features listed above.
 
 Requirements
 ------------
-- Modern Linux 
-- Graphical desktop
-- Qt 5 libraries installed
-- Qt Multimedia library 
+- Modern Linux or Windows 
+- Graphical desktop (in Linux)
+- Qt 5 and Qt Multimedia libraries
 - More than 512MB RAM and 2 GHz CPU
 
 Qt packets can be downloaded from your distribution repository.
